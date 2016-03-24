@@ -1,0 +1,88 @@
+/**
+ * Todo header
+ */
+.todo-header {
+  padding:5rem;
+  text-align:center;
+}
+.todo-header .title {
+  margin-bottom:2rem;
+  font-weight:100;
+  font-size:7rem;
+  color:#e74c3c;
+}
+.todo-header .search-area {
+  width:70%;
+  height:50px;
+  margin:0 auto;
+}
+.todo-header .search-area:before,
+.todo-header .search-area:after {
+  display:table;
+  content:'';
+}
+.todo-header .search-area:after {
+  clear:both;
+}
+.todo-header .search-area .input-search {
+  float:left;
+  width:80%;
+  height:inherit;
+  padding:1rem 1.5rem;
+  border:1px solid #ccc;
+  border-top-left-radius:3px;
+  border-bottom-left-radius:3px;
+  font-weight:300;
+  font-size:1.6rem;
+  line-height:2rem;
+}
+.todo-header .search-area .btn-search {
+  float:left;
+  width:20%;
+  height:inherit;
+  margin-left:-1px;
+  border:0;
+  border-radius:3px;
+  border-top-left-radius:0;
+  border-bottom-left-radius:0;
+  background-color:#e74c3c;
+  font-size:1.6rem;
+  color:#fff;
+}
+
+
+/**
+ * Todo main
+ */
+.list-movie {
+  text-align:center;
+}
+.list-movie li {
+  display:inline-block;
+  width:47%;
+  margin-bottom:2.5rem;
+  padding:0 1%;
+  vertical-align:top;
+}
+@media (min-width:768px) {
+  .list-movie li {
+    width:32%;
+  }
+}
+@media (min-width:992px) {
+  .list-movie li {
+    width:24%;
+  }
+}
+@media (min-width:1200px) {
+  .list-movie li {
+    width:19%;
+  }
+}
+.list-movie .thumb,
+.list-movie .thumb img {
+  width:100%;
+}
+.list-movie .info {
+  margin-top:10px;
+}

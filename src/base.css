@@ -1,0 +1,182 @@
+@charset "utf-8";
+/**
+ * Reset style
+ */
+*,
+:before,
+:after {
+  -webkit-box-sizing:border-box;
+  -moz-box-sizing:border-box;
+  box-sizing:border-box;
+}
+body,dl,dd,ul,ol,menu,h1,h2,h3,h4,h5,h6,pre,fieldset,figure,legend,p,blockquote,input,optgroup,select,textarea,button {
+  margin:0;
+  padding:0;
+}
+article,aside,details,figcaption,figure,footer,header,hgroup,main,menu,nav,section,summary {
+  display:block;
+}
+fieldset,
+img {
+  border:0;
+}
+img {
+  vertical-align:middle;
+}
+dl,
+ul,
+ol,
+menu,
+li {
+  list-style:none;
+}
+address,
+caption,
+cite,
+code,
+dfn,
+em,
+var {
+  font-style:normal;
+  font-weight:normal;
+}
+code {
+  padding:2px 4px;
+  color:#c7254e;
+  background-color:#f9f2f4;
+  border-radius:4px;
+}
+blockquote, q {
+  quotes:none;
+}
+blockquote:before,
+blockquote:after,
+q:before,
+q:after {
+  content:'';
+  content:none;
+}
+input,
+select,
+textarea,
+button {
+  vertical-align:middle;
+}
+hr,
+legend {
+  display:none;
+}
+small {
+  font-size: 80%;
+}
+button,
+input,
+optgroup,
+select,
+textarea {
+  font-family:inherit;
+  font-size:inherit;
+  color:inherit;
+  line-height:inherit;
+}
+button {
+  overflow:visible;
+  cursor:pointer;
+}
+button,
+select {
+  text-transform:none;
+}
+button[disabled] {
+  cursor:default;
+}
+button::-moz-focus-inner,
+input::-moz-focus-inner {
+  padding:0;
+  border:0;
+}
+button,
+input[type="button"],
+input[type="reset"],
+input[type="submit"] {
+  -webkit-appearance:button;
+  cursor:pointer;
+}
+input {
+  line-height:normal;
+}
+
+textarea {
+  overflow:auto;
+}
+table {
+  width:100%;
+  border-spacing:0;
+  border-collapse:collapse;
+}
+
+
+/**
+ * 기본 스타일 정의
+ */
+html {
+  font-family:'Helvetica Neue', Helvetica, Arial, sans-serif;
+  font-size:10px;
+}
+body {
+  background-color:#f9f9f9;
+  font-size:1.4rem;
+  line-height:1.5;
+  color:#333;
+}
+a {
+  color:#337AB7;
+  text-decoration:none;
+}
+a:hover,
+a:focus,
+a:active {
+  color:#23527C;
+}
+
+
+/**
+ * Global Classes
+ */
+
+/* Float */
+.clearfix {
+  *zoom:1;
+}
+.clearfix:before,
+.clearfix:after {
+  display:table;
+  content:'';
+}
+.clearfix:after {
+  clear:both;
+}
+.pull-right {
+  float:right !important;
+}
+.pull-left {
+  float:left !important;
+}
+
+/* Display */
+.show {
+  display:block !important;
+}
+.hide {
+  display:none !important;
+}
+.sr-only {
+  overflow:hidden;
+  position:absolute;
+  width:1px;
+  height:1px;
+  margin:-1px;
+  padding:0;
+  clip:rect(0, 0, 0, 0);
+  border:0;
+}
