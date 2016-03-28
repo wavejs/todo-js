@@ -1,0 +1,131 @@
+<!DOCTYPE html>
+<html lang="ko">
+<head>
+<meta charset="UTF-8">
+<meta http-equiv="X-UA-Compatible" content="IE=edge">
+<meta http-equiv="imagetoolbar" content="no">
+<title>todo-js</title>
+<link rel="stylesheet" type="text/css" href="../src/base.css">
+<link rel="stylesheet" type="text/css" href="../src/page.css">
+</head>
+<body>
+
+<section class="todo-header">
+  <h1 class="title">Todo-js</h1>
+  <div class="search-area">
+    <input type="text" class="input-search" data-input="search" placeholder="Find the movie title">
+    <button type="button" class="btn-search" data-button="search">검색</button>
+  </div>
+</section>
+<section class="todo-main">
+  <ul class="list-movie">
+    <li>
+      <div class="thumb">
+        <img src="http://ia.media-imdb.com/images/M/MV5BNTE5NzU3MTYzOF5BMl5BanBnXkFtZTgwNTM5NjQxODE@._V1_UY268_CR0,0,182,268_AL_.jpg" alt="search.Title">
+      </div>
+      <div class="info">
+        <div class="title">Batman v Superman: Dawn of Justice (2016)</div>
+      </div>
+    </li>
+    <li>
+      <div class="thumb">
+        <img src="http://ia.media-imdb.com/images/M/MV5BNTE5NzU3MTYzOF5BMl5BanBnXkFtZTgwNTM5NjQxODE@._V1_UY268_CR0,0,182,268_AL_.jpg" alt="search.Title">
+      </div>
+      <div class="info">
+        <div class="title">Batman (2016)</div>
+      </div>
+    </li>
+    <li>
+      <div class="thumb">
+        <img src="http://ia.media-imdb.com/images/M/MV5BNTE5NzU3MTYzOF5BMl5BanBnXkFtZTgwNTM5NjQxODE@._V1_UY268_CR0,0,182,268_AL_.jpg" alt="search.Title">
+      </div>
+      <div class="info">
+        <div class="title">Batman v Superman: Dawn of Justice (2016)</div>
+      </div>
+    </li>
+    <li>
+      <div class="thumb">
+        <img src="http://ia.media-imdb.com/images/M/MV5BNTE5NzU3MTYzOF5BMl5BanBnXkFtZTgwNTM5NjQxODE@._V1_UY268_CR0,0,182,268_AL_.jpg" alt="search.Title">
+      </div>
+      <div class="info">
+        <div class="title">Batman v Superman: Dawn of Justice (2016)</div>
+      </div>
+    </li>
+    <li>
+      <div class="thumb">
+        <img src="http://ia.media-imdb.com/images/M/MV5BNTE5NzU3MTYzOF5BMl5BanBnXkFtZTgwNTM5NjQxODE@._V1_UY268_CR0,0,182,268_AL_.jpg" alt="search.Title">
+      </div>
+      <div class="info">
+        <div class="title">Batman v Superman: Dawn of Justice (2016)</div>
+      </div>
+    </li>
+    <li>
+      <div class="thumb">
+        <img src="http://ia.media-imdb.com/images/M/MV5BNTE5NzU3MTYzOF5BMl5BanBnXkFtZTgwNTM5NjQxODE@._V1_UY268_CR0,0,182,268_AL_.jpg" alt="search.Title">
+      </div>
+      <div class="info">
+        <div class="title">Batman v Superman: Dawn of Justice (2016)</div>
+      </div>
+    </li>
+  </ul>
+</section>
+
+<script src="http://code.jquery.com/jquery-1.12.0.min.js"></script>
+<script type="text/javascript">
+  var search = {
+    temp : null,
+    // Set variable
+    getVariable : function() {
+      var $input = $('[data-input=search]');
+      var $button = $('[data-button=search]');
+      return {
+        $input : $input,
+        $button : $button,
+      }
+    },
+    // 검색 이벤트
+    searchFunc : function() {
+      var oValue = this.temp;
+
+      var isEmpty = oValue.$input.val() === '';
+      var inputValue = oValue.$input[0].value;
+
+      if (isEmpty) {
+        alert('검색어를 입력하세요!');
+      } else {
+        alert(inputValue + '로 검색할 준비가 됐네요!');
+      }
+    },
+    // 검색 버튼 Click 이벤트
+    evtClick : function() {
+      var self = this;
+      var oValue = self.temp;
+
+      oValue.$button.click(function() {
+        self.searchFunc();
+      });
+    },
+    // Enter 키보드 keydown 이벤트
+    evtEnter : function() {
+      var self = this;
+
+      $(document).keydown(function(e) {
+        if (e.keyCode == '13') {
+          self.searchFunc();
+        }
+      });
+    },
+    init : function() {
+      this.temp = this.getVariable();
+      this.evtClick();
+      this.evtEnter();
+    }
+  };
+
+  $(document).ready(function() {
+    search.init();
+  });
+</script>
+
+</body>
+</html>
