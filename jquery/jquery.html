@@ -1,0 +1,180 @@
+<!DOCTYPE html>
+<html lang="ko">
+<head>
+<meta charset="UTF-8">
+<meta http-equiv="X-UA-Compatible" content="IE=edge">
+<meta http-equiv="imagetoolbar" content="no">
+<title>todo-js</title>
+<link rel="stylesheet" type="text/css" href="../src/base.css">
+<link rel="stylesheet" type="text/css" href="../src/common.css">
+<link rel="stylesheet" type="text/css" href="../src/page.css">
+</head>
+<body>
+
+<section class="todo-header">
+  <h1 class="title">Todo-js</h1>
+  <div class="search-area">
+    <input type="text" class="input-search" data-input="search" placeholder="Find the movie title">
+    <button type="button" class="btn-search" data-button="search">검색</button>
+  </div>
+</section>
+<section class="todo-main">
+  <ul class="list-movie" data-list="movie"></ul>
+</section>
+
+<script src="http://code.jquery.com/jquery-1.12.0.min.js"></script>
+<script type="text/javascript">
+var search = {
+  temp: null,
+
+  // Set variable
+  getVariable: function() {
+    var $input = $('[data-input=search]');
+    var $button = $('[data-button=search]');
+    var $list = $('[data-list=movie]');
+    return {
+      $input: $input,
+      $button: $button,
+      $list: $list
+    }
+  },
+
+  // 출력할 Dom 생성
+  manipulateDom: {
+    // Loading bar 시 출력
+    loading: function($elem) {
+      var e = '';
+      e += '<li data-loading="spinner">';
+      e += '  <div class="spinner">';
+      e += '    <i class="rect"></i>';
+      e += '    <i class="rect"></i>';
+      e += '    <i class="rect"></i>';
+      e += '    <i class="rect"></i>';
+      e += '    <i class="rect"></i>';
+      e += '  </div>';
+      e += '</li>';
+      $elem.append(e);
+    },
+
+    // Success 시 출력
+    success: function($elem) {
+      var e = '';
+      e += '<li>'
+      e += '  <div class="thumb">'
+      e += '    <img src="" alt="" data-image="poster">'
+      e += '  </div>'
+      e += '  <div class="info">'
+      e += '    <div class="title" data-title="movie"></div>'
+      e += '  </div>'
+      e += '</li>'
+      $elem.append(e);
+    },
+
+    // Error 문구 출력
+    error: function($elem, text) {
+      var e = '<li class="error">' + text + '</li>';
+      $elem.append(e);
+    }
+  },
+
+  // isSuccess : 데이터가 있을경우
+  isSuccess: function(data) {
+    var self = this;
+    var oValue = this.temp;
+    var $ul = oValue.$list;
+
+    $.each(data, function(i) {
+      // response 변수
+      var _img = data[i].Poster;
+      var _title = data[i].Title;
+      var _year = data[i].Year;
+
+      // ul > li Dom 생성
+      self.manipulateDom.success($ul);
+
+      var _eq = i + 1; // 1은 기존 노출되고 있는 로딩 바
+      var $li = $ul.find('li').eq(_eq);
+
+      $li.find('[data-image=poster]').attr({
+        src: _img,
+        alt: _title
+      });
+      $li.find('[data-title=movie]').append(_title + ' (' + _year + ')');
+    });
+  },
+
+  // 검색 이벤트
+  searchFunc: function() {
+    var self = this;
+    var oValue = this.temp;
+    var $ul = oValue.$list;
+    var $inp = oValue.$input;
+
+    var isEmpty = $inp.val() === '';
+    var inputValue = $inp[0].value;
+
+    if (isEmpty) {
+      alert('검색어를 입력하세요!');
+    } else {
+      $ul.empty(); // 리스트 목록 삭제
+      self.manipulateDom.loading($ul); // 로딩 바 출력
+
+      $.ajax({
+        type: 'GET',
+        url: 'http://omdbapi.com/?s=' + inputValue,
+        dataType: 'json',
+        success: function(response) {
+          var searchs = response.Search;
+          var isSuccess = (response.Response === 'True') && (searchs.length > 0)
+
+          if (isSuccess) {
+            self.isSuccess(searchs);
+          } else {
+            self.manipulateDom.error($ul, '검색 결과가 없습니다.');
+          }
+        },
+        complete: function() {
+          $ul.find('[data-loading=spinner]').remove();
+        },
+        error: function() {
+          self.manipulateDom.error($ul, '문제가 발생했습니다. 잠시 후 다시 시도하세요.');
+        }
+      });
+    }
+  },
+
+  // 검색 버튼 Click 이벤트
+  evtClick: function() {
+    var self = this;
+    var oValue = this.temp;
+
+    oValue.$button.click(function() {
+      self.searchFunc();
+    });
+  },
+
+  // Enter 키보드 keydown 이벤트
+  evtEnter: function() {
+    var self = this;
+    var oValue = this.temp;
+    $(document).keydown(function(e) {
+      if ((oValue.$input.is(':focus')) && (e.keyCode === 13)) {
+        self.searchFunc();
+      }
+    });
+  },
+
+  init: function() {
+    this.temp = this.getVariable();
+    this.evtClick();
+    this.evtEnter();
+  }
+};
+
+$(document).ready(function() {
+  search.init();
+});
+</script>
+
+</body>
+</html>
