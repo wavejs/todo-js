@@ -72,59 +72,79 @@
 
 <script src="http://code.jquery.com/jquery-1.12.0.min.js"></script>
 <script type="text/javascript">
-  var search = {
-    temp : null,
-    // Set variable
-    getVariable : function() {
-      var $input = $('[data-input=search]');
-      var $button = $('[data-button=search]');
-      return {
-        $input : $input,
-        $button : $button,
-      }
-    },
-    // 검색 이벤트
-    searchFunc : function() {
-      var oValue = this.temp;
+var search = {
+  temp : null,
+  // Set variable
+  getVariable : function() {
+    var $input = $('[data-input=search]');
+    var $button = $('[data-button=search]');
+    return {
+      $input : $input,
+      $button : $button,
+    }
+  },
+  // 검색 이벤트
+  searchFunc : function() {
+    var oValue = this.temp;
 
-      var isEmpty = oValue.$input.val() === '';
-      var inputValue = oValue.$input[0].value;
+    var isEmpty = oValue.$input.val() === '';
+    var inputValue = oValue.$input[0].value;
 
-      if (isEmpty) {
-        alert('검색어를 입력하세요!');
-      } else {
-        alert(inputValue + '로 검색할 준비가 됐네요!');
-      }
-    },
-    // 검색 버튼 Click 이벤트
-    evtClick : function() {
-      var self = this;
-      var oValue = self.temp;
+    if (isEmpty) {
+      alert('검색어를 입력하세요!');
+    } else {
+      $.ajax({
+        type: 'GET',
+        url: 'http://omdbapi.com/?s=' + inputValue,
+        dataType : 'json',
+        success: function(response) {
+          var searchs = response.Search;
+          var isSuccess = (response.Response == 'True') && (searchs.length > 0)
 
-      oValue.$button.click(function() {
-        self.searchFunc();
-      });
-    },
-    // Enter 키보드 keydown 이벤트
-    evtEnter : function() {
-      var self = this;
-
-      $(document).keydown(function(e) {
-        if (e.keyCode == '13') {
-          self.searchFunc();
+          if (isSuccess) {
+            $.each(searchs, function(i) {
+              console.log(response.Search[i].Title);
+            });
+          } else {
+            console.log('success error');
+          }
+        },
+        error: function() {
+          alert('error');
         }
       });
-    },
-    init : function() {
-      this.temp = this.getVariable();
-      this.evtClick();
-      this.evtEnter();
+      // alert(inputValue + '로 검색할 준비가 됐네요!');
     }
-  };
+  },
+  // 검색 버튼 Click 이벤트
+  evtClick : function() {
+    var self = this;
+    var oValue = self.temp;
 
-  $(document).ready(function() {
-    search.init();
-  });
+    oValue.$button.click(function() {
+      self.searchFunc();
+    });
+  },
+  // Enter 키보드 keydown 이벤트
+  evtEnter : function() {
+    var self = this;
+
+    $(document).keydown(function(e) {
+      if (e.keyCode == '13') {
+        self.searchFunc();
+      }
+    });
+  },
+  init : function() {
+    this.temp = this.getVariable();
+    this.evtClick();
+    this.evtEnter();
+  }
+};
+
+$(document).ready(function() {
+  search.init();
+});
 </script>
 
 </body>
