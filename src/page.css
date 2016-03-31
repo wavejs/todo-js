@@ -79,6 +79,9 @@
     width:19%;
   }
 }
+.list-movie .error {
+  width:auto;
+}
 .list-movie .thumb,
 .list-movie .thumb img {
   width:100%;
