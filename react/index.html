@@ -1,0 +1,29 @@
+<!DOCTYPE html>
+<html lang="ko">
+  <head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta http-equiv="imagetoolbar" content="no">
+    <title>todo-js</title>
+    <link rel="stylesheet" type="text/css" href="../src/base.css">
+    <link rel="stylesheet" type="text/css" href="../src/common.css">
+    <link rel="stylesheet" type="text/css" href="../src/page.css">
+  </head>
+  <body>
+    <div id="rc-app">
+      <!-- rc is short of react container -->
+      <section class="todo-header">
+        <h1 class="title">Todo-js</h1>
+        <div class="search-area">
+          <input type="text" class="input-search" placeholder="Find the movie title" />
+          <button type="button" class="btn-search">검색</button>
+        </div>
+      </section>
+    </div>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/react/0.14.7/react.js"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/react/0.14.7/react-dom.js"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/babel-core/5.8.34/browser.min.js"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/superagent/1.2.0/superagent.min.js"></script>
+    <script type="text/babel" src="app/components/App.jsx"></script>
+  </body>
+</html>
