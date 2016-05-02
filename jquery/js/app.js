@@ -1,56 +1,71 @@
 jQuery(function($) {
   'use strict';
 
+  var API_KEY = 'da64071f';
   var ENTER_KEY = 13;
 
   var App = {
+    inProgress : false,
+
     init: function() {
       this.bindEvents();
     },
+
     bindEvents: function() {
       $('[data-button=search]').on('click', this.searchFunc.bind(this));
       $('[data-input=search]').on('keydown', this.editKeydown.bind(this));
     },
+
     creatDom: {
       // 로딩 바 출력
       loading: function($elem) {
-        var e = '';
-        e += '<li data-loading="spinner">';
-        e += '  <div class="spinner">';
-        e += '    <i class="rect"></i>';
-        e += '    <i class="rect"></i>';
-        e += '    <i class="rect"></i>';
-        e += '    <i class="rect"></i>';
-        e += '    <i class="rect"></i>';
-        e += '  </div>';
-        e += '</li>';
-        $elem.append(e);
+        var $spinner = $('<div/>', {'class': 'spinner'});
+        var $li = $('<li/>', {'data-loading': 'spinner'});
+
+        $elem.append($li);
+        $li.append($spinner);
+
+        var barLength = 5;
+        for (var i = 0; i < barLength; i++) {
+          var $rect = '<i class="rect"></i>&nbsp;';
+          $spinner.append($rect);
+        }
       },
+
       // 리스트 출력
       success: function($elem) {
-        var e = '';
-        e += '<li>'
-        e += '  <div class="thumb">'
-        e += '    <img src="" alt="" data-image="poster">'
-        e += '  </div>'
-        e += '  <div class="info">'
-        e += '    <div class="title" data-title="movie"></div>'
-        e += '  </div>'
-        e += '</li>'
-        $elem.append(e);
+        // <li>
+        //   <div class="thumb">
+        //     <img src="" alt="" data-image="poster">
+        //   </div>
+        //   <div class="info">
+        //     <div class="title" data-title="movie"></div>
+        //   </div>
+        // </li>
+        var $li = $('<li/>'),
+            $thumb = $('<div/>', {'class': 'thumb'}),
+            $img = $('<img/>', {'alt': '', 'data-image': 'poster'}),
+            $info = $('<div/>', {'class': 'info'}),
+            $title = $('<div/>', {'class': 'title', 'data-title': 'movie'});
+        $elem.append($li);
+        $li.append($thumb, $info);
+        $thumb.append($img);
+        $info.append($title);
       },
+
       // Error 출력 (데이터 X, api호출 X)
       error: function($elem, text) {
         var e = '<li class="error">' + text + '</li>';
         $elem.append(e);
       }
     },
+
     // 출력 데이터 선언
     successData: function(data, selectorUl) {
       var self = this;
 
       $.each(data, function(i) {
-        var _img = data[i].Poster;
+        var _img = 'http://img.omdbapi.com/?i=' + data[i].imdbID + '&apikey=' + API_KEY;
         var _title = data[i].Title;
         var _year = data[i].Year;
 
@@ -69,6 +84,7 @@ jQuery(function($) {
         $title.append(_title + ' (' + _year + ')');
       });
     },
+
     // 검색 결과
     searchFunc: function() {
       var self = this;
@@ -80,7 +96,8 @@ jQuery(function($) {
 
       if (isEmpty) {
         alert('검색어를 입력하세요!');
-      } else {
+      } else if ((!isEmpty) && (self.inProgress === false)) {
+        self.inProgress = true;
         $ul.empty(); // 리스트 목록 삭제
         self.creatDom.loading($ul); // 로딩 바 출력
 
@@ -88,6 +105,7 @@ jQuery(function($) {
           type: 'GET',
           url: 'http://omdbapi.com/?s=' + inputValue,
           dataType: 'json',
+
           success: function(response) {
             var searchs = response.Search;
             var isSuccess = (response.Response === 'True') && (searchs.length > 0)
@@ -98,18 +116,24 @@ jQuery(function($) {
               self.creatDom.error($ul, '"' + inputValue + '" 의 검색 결과가 없습니다.');
             }
           },
+
           complete: function() {
+            self.inProgress = false;
             $ul.find('[data-loading=spinner]').remove();
           },
+
           error: function() {
             self.creatDom.error($ul, '문제가 발생했습니다. 잠시 후 다시 시도하세요.');
           }
         });
       }
     },
+
     // Enter 키보드 keydown 이벤트
     editKeydown: function(e) {
-      if (e.which === ENTER_KEY) {
+      var keyCode = e.which || e.keyCode;
+
+      if (keyCode === ENTER_KEY) {
         this.searchFunc();
       }
     }
