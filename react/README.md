@@ -1,3 +1,5 @@
-## React JS
+# React basic demo
 
-`React JS`를 이용한 데모입니다.
+* `ES5`
+* `JSX`
+* `External`
