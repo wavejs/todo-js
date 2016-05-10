@@ -30,55 +30,77 @@
       </div>
     </li>
     <li>
-      <div class="thumb">
-        <img src="http://ia.media-imdb.com/images/M/MV5BNTE5NzU3MTYzOF5BMl5BanBnXkFtZTgwNTM5NjQxODE@._V1_UY268_CR0,0,182,268_AL_.jpg" alt="search.Title">
-      </div>
-      <div class="info">
-        <div class="title">Batman v Superman: Dawn of Justice (2016)</div>
-      </div>
-    </li>
-    <li>
-      <div class="thumb">
-        <img src="http://ia.media-imdb.com/images/M/MV5BNTE5NzU3MTYzOF5BMl5BanBnXkFtZTgwNTM5NjQxODE@._V1_UY268_CR0,0,182,268_AL_.jpg" alt="search.Title">
-      </div>
-      <div class="info">
-        <div class="title">Batman (2016)</div>
-      </div>
-    </li>
-    <li>
-      <div class="thumb">
-        <img src="http://ia.media-imdb.com/images/M/MV5BNTE5NzU3MTYzOF5BMl5BanBnXkFtZTgwNTM5NjQxODE@._V1_UY268_CR0,0,182,268_AL_.jpg" alt="search.Title">
-      </div>
-      <div class="info">
-        <div class="title">Batman v Superman: Dawn of Justice (2016)</div>
-      </div>
-    </li>
-    <li>
-      <div class="thumb">
-        <img src="http://ia.media-imdb.com/images/M/MV5BNTE5NzU3MTYzOF5BMl5BanBnXkFtZTgwNTM5NjQxODE@._V1_UY268_CR0,0,182,268_AL_.jpg" alt="search.Title">
-      </div>
-      <div class="info">
-        <div class="title">Batman v Superman: Dawn of Justice (2016)</div>
-      </div>
-    </li>
-    <li>
-      <div class="thumb">
-        <img src="http://ia.media-imdb.com/images/M/MV5BNTE5NzU3MTYzOF5BMl5BanBnXkFtZTgwNTM5NjQxODE@._V1_UY268_CR0,0,182,268_AL_.jpg" alt="search.Title">
-      </div>
-      <div class="info">
-        <div class="title">Batman v Superman: Dawn of Justice (2016)</div>
-      </div>
-    </li>
-    <li>
-      <div class="thumb">
-        <img src="http://ia.media-imdb.com/images/M/MV5BNTE5NzU3MTYzOF5BMl5BanBnXkFtZTgwNTM5NjQxODE@._V1_UY268_CR0,0,182,268_AL_.jpg" alt="search.Title">
-      </div>
-      <div class="info">
-        <div class="title">Batman v Superman: Dawn of Justice (2016)</div>
-      </div>
+      <a href="javascript:;" class="link">
+        <div class="thumb">
+          <img src="http://ia.media-imdb.com/images/M/MV5BNTE5NzU3MTYzOF5BMl5BanBnXkFtZTgwNTM5NjQxODE@._V1_UY268_CR0,0,182,268_AL_.jpg" alt="search.Title">
+        </div>
+        <div class="info">
+          <div class="title">Batman v Superman: Dawn of Justice (2016)</div>
+        </div>
+      </a>
     </li>
   </ul>
 </section>
+
+<!-- View layer -->
+<!--
+  * script 작업 시 참고
+
+  animate time : 0.25s(250ms)
+
+  open event flow
+    body > "layer-collapse" "layer-opend" 클래스 추가
+  close event flow
+    body > "layer-opend" 클래스 삭제
+    setTimeout(animate time) > body > "layer-collapse" 클래스 삭제
+-->
+<article class="todo-view">
+  <section class="layer">
+    <h1 class="sr-only">{Title}</h1>
+    <button type="button" class="btn-close">
+      <span class="sr-only">Close</span>
+    </button>
+    <div class="thumb">
+      <img src="http://ia.media-imdb.com/images/M/MV5BMTYwNjAyODIyMF5BMl5BanBnXkFtZTYwNDMwMDk2._V1_SX300&apikey=da64071f.jpg" alt="{Title}">
+    </div>
+    <div class="info">
+      <dl>
+        <dt>Title</dt>
+        <dd>{Title}</dd>
+      </dl>
+      <dl>
+        <dt>Released</dt>
+        <dd>{Released}</dd>
+      </dl>
+      <dl>
+        <dt>Runtime</dt>
+        <dd>{Runtime}</dd>
+      </dl>
+      <dl>
+        <dt>Genre</dt>
+        <dd>{Genre}</dd>
+      </dl>
+      <dl>
+        <dt>Director</dt>
+        <dd>{Director}</dd>
+      </dl>
+      <dl>
+        <dt>Writer</dt>
+        <dd>{Writer}</dd>
+      </dl>
+      <dl>
+        <dt>Actors</dt>
+        <dd>{Actors}</dd>
+      </dl>
+      <dl>
+        <dt>Plot</dt>
+        <dd>{Plot}</dd>
+      </dl>
+    </div>
+  </section>
+  <i class="dim"></i>
+</article>
+<!-- View layer -->
 
 </body>
 </html>

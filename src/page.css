@@ -79,6 +79,12 @@
     width:19%;
   }
 }
+.list-movie .link {
+  display:block;
+  cursor:-webkit-zoom-in;
+  cursor:-moz-zoom-in;
+  cursor:zoom-in;
+}
 .list-movie .error {
   width:auto;
 }
@@ -88,4 +94,159 @@
 }
 .list-movie .info {
   margin-top:10px;
+}
+
+
+/**
+ * Todo view
+ * Layer 형태
+ */
+.todo-view {
+  overflow-x:hidden;
+  overflow-y:auto;
+  position:fixed;
+  top:0;
+  right:0;
+  left:0;
+  z-index:1000;
+  height:0;
+  text-align:center;
+}
+.todo-view .layer {
+  display:inline-block;
+  overflow:hidden;
+  position:relative;
+  z-index:2;
+  width:800px;
+  padding:40px;
+  background-color:#fff;
+  border-radius:5px;
+  box-shadow:7px 7px 30px rgba(0, 0, 0, .35);
+  text-align:left;
+  -webkit-transition-property:all;
+  transition-property:all;
+  -webkit-transition-duration:.25s;
+  transition-duration:.25s;
+  -webkit-transition-timing-function:ease-in-out;
+  transition-timing-function:ease-in-out;
+}
+.todo-view .btn-close {
+  position:absolute;
+  top:0;
+  right:0;
+  width:40px;
+  height:40px;
+  border:0;
+  background-color:#fff;
+  cursor:-webkit-zoom-out;
+  cursor:-moz-zoom-out;
+  cursor:zoom-out;
+}
+.todo-view .btn-close:before,
+.todo-view .btn-close:after {
+  position:absolute;
+  top:50%;
+  left:50%;
+  width:18px;
+  height:2px;
+  margin:-1px 0 0 -9px;
+  background-color:#aaa;
+  content:'';
+}
+.todo-view .btn-close:before {
+  -webkit-transform:rotate(45deg);
+  -ms-transform:rotate(45deg);
+  transform:rotate(45deg);
+}
+.todo-view .btn-close:after {
+  -webkit-transform:rotate(-45deg);
+  -ms-transform:rotate(-45deg);
+  transform:rotate(-45deg);
+}
+.todo-view .thumb {
+  float:left;
+  margin-right:20px;
+}
+.todo-view .thumb > img {
+  display:block;
+  border-radius:5px;
+}
+.todo-view .info {
+  overflow:hidden;
+  /*color:#fff;*/
+}
+.todo-view .info dl {
+  padding:7px 10px;
+  border-bottom:1px solid #ccc;
+}
+.todo-view .info dl:before,
+.todo-view .info dl:after {
+  display:table;
+  content:'';
+}
+.todo-view .info dl:after {
+  clear:both;
+}
+.todo-view .info dl:first-child {
+  border-top:1px solid #ccc;
+}
+.todo-view .info dl > dt {
+  float:left;
+  position:relative;
+  width:80px;
+  margin-right:15px;
+}
+.todo-view .info dl > dt:after {
+  position:absolute;
+  top:3px;
+  right:0;
+  bottom:3px;
+  width:1px;
+  background-color:#ccc;
+  content:'';
+}
+.todo-view .info dl > dd {
+  overflow:hidden;
+}
+.todo-view .dim {
+  position:fixed;
+  top:0;
+  right:0;
+  bottom:0;
+  left:0;
+  z-index:1;
+  background-color:rgba(0, 0, 0, .5);
+  cursor:-webkit-zoom-out;
+  cursor:-moz-zoom-out;
+  cursor:zoom-out;
+  -webkit-transition:opacity .25s linear;
+  transition:opacity .25s linear;
+}
+
+/* Animate option */
+.todo-view .layer,
+.todo-view .dim {
+  opacity:0;
+}
+.todo-view .layer {
+  top:-20px;
+}
+
+/* Class handler */
+.layer-opend,
+.layer-collapse {
+  overflow:hidden;
+}
+.layer-opend .todo-view,
+.layer-collapse .todo-view {
+  bottom:0;
+  height:auto;
+  padding:20px 0;
+}
+.layer-collapse.layer-opend .todo-view .layer {
+  top:0;
+  opacity:1;
+}
+.layer-collapse.layer-opend .todo-view .dim {
+  opacity:1;
 }
