@@ -120,10 +120,12 @@ table {
  * 기본 스타일 정의
  */
 html {
+  height:100%;
   font-family:'Helvetica Neue', Helvetica, Arial, sans-serif;
   font-size:10px;
 }
 body {
+  min-height:100%;
   background-color:#f9f9f9;
   font-size:1.4rem;
   line-height:1.5;
