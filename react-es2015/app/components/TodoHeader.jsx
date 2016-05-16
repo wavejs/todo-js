@@ -1,5 +1,5 @@
-import React from 'react';
-import ReactDOM from 'react-dom';
+import React, { Component } from 'react';
+import { findDOMNode } from 'react-dom';
 import superagent from 'superagent';
 
 const KEYS = {
@@ -15,19 +15,19 @@ const defaultProps = {
   },
 };
 
-class TodoHeader extends React.Component {
+class TodoHeader extends Component {
 
   constructor() {
     super();
 
-    this.getNodeKeyword = this.getNodeKeyword.bind(this);
     this.getMovieList = this.getMovieList.bind(this);
     this.handleKeyDown = this.handleKeyDown.bind(this);
     this.handleClick = this.handleClick.bind(this);
   }
 
-  getNodeKeyword() {
-    return ReactDOM.findDOMNode(this.refs.searchKeyword);
+  componentDidMount() {
+    this.search = findDOMNode(this.refs.searchKeyword);
+    this.search.focus();
   }
 
   getMovieList(query) {
@@ -59,23 +59,19 @@ class TodoHeader extends React.Component {
       });
   }
 
-  componentDidMount() {
-    this.getNodeKeyword().focus();
-  }
-
   handleKeyDown(e) {
     if (e.keyCode !== KEYS.ENTER) { return; }
 
     this.getMovieList({
-      s: this.getNodeKeyword().value,
+      s: this.search.value,
     });
   }
 
   handleClick(e) {
     this.getMovieList({
-      s: this.getNodeKeyword().value,
+      s: this.search.value,
     });
-    this.getNodeKeyword().focus();
+    this.search.focus();
   }
 
   render() {
