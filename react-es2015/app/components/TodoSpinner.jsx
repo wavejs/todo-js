@@ -1,9 +1,8 @@
-import React from 'react';
-import ReactDOM from 'react-dom';
+import React, { PropTypes } from 'react';
 
 const propTypes = {
-  show: React.PropTypes.bool,
-  rectCount: React.PropTypes.number,
+  show: PropTypes.bool,
+  rectCount: PropTypes.number,
 };
 
 const defaultProps = {
@@ -11,26 +10,22 @@ const defaultProps = {
   rectCount: 5,
 };
 
-class TodoSpinner extends React.Component {
+function TodoSpinner(props) {
+  let rects = [];
 
-  render() {
-    let rects = [];
-
-    for (let i = 0; i < this.props.rectCount; i++) {
-      rects.push(<i key={i} className="rect" />);
-    }
-
-    return (
-      <ul className="list-movie">
-        <li>
-          <div className="spinner">
-            {rects}
-          </div>
-        </li>
-      </ul>
-    );
+  for (let i = 0; i < props.rectCount; i++) {
+    rects.push(<i key={i} className="rect" />);
   }
 
+  return (
+    <ul className="list-movie">
+      <li>
+        <div className="spinner">
+          {rects}
+        </div>
+      </li>
+    </ul>
+  );
 }
 
 TodoSpinner.propTypes = propTypes;

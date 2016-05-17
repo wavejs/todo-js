@@ -1,8 +1,7 @@
-import React from 'react';
-import ReactDOM from 'react-dom';
+import React, { PropTypes } from 'react';
 
 const propTypes = {
-  list: React.PropTypes.array.isRequired,
+  list: PropTypes.array.isRequired,
 };
 
 const defaultProps = {
@@ -13,15 +12,13 @@ const defaultProps = {
   },
 };
 
-class TodoList extends React.Component {
+function TodoList(props) {
+  const API_URI = props.api.uri;
+  const API_KEY = props.api.key;
 
-  render() {
-    const API_URI = this.props.api.uri;
-    const API_KEY = this.props.api.key;
-
-    return (
-      <ul className="list-movie">
-      {this.props.list.map((item, key) => {
+  return (
+    <ul className="list-movie">
+      {props.list.map(function (item, key) {
         const imgSrc = API_URI + '?i=' + item.imdbID + '&apikey=' + API_KEY;
 
         return (
@@ -35,10 +32,8 @@ class TodoList extends React.Component {
           </li>
         );
       })}
-      </ul>
-    );
-  }
-
+    </ul>
+  );
 }
 
 TodoList.propTypes = propTypes;

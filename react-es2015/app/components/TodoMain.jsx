@@ -1,45 +1,34 @@
-import React from 'react';
-import ReactDOM from 'react-dom';
+import React, { PropTypes } from 'react';
 import TodoSpinner from './TodoSpinner';
 import TodoList from './TodoList';
 
 const propTypes = {
-  list: React.PropTypes.array.isRequired,
-  spinner: React.PropTypes.shape({
-    show: React.PropTypes.bool,
-    rectCount: React.PropTypes.number,
+  list: PropTypes.array.isRequired,
+  spinner: PropTypes.shape({
+    show: PropTypes.bool,
+    rectCount: PropTypes.number,
   }),
 };
 
-class TodoMain extends React.Component {
+function TodoMain(props) {
+  let main;
 
-  constructor() {
-    super();
-  }
-
-  render() {
-    let main;
-
-    if (this.props.spinner && this.props.spinner.show) {
-      main = (
-        <TodoSpinner
-          show={this.props.spinner.show}
-          rectCount={this.props.spinner.rectCount}
-        />
-      );
-    } else {
-      main = (
-        <TodoList list={this.props.list} />
-      );
-    }
-
-    return (
-      <section className="todo-main">
-        {main}
-      </section>
+  if (props.spinner && props.spinner.show) {
+    main = (
+      <TodoSpinner
+        show={props.spinner.show}
+        rectCount={props.spinner.rectCount}
+      />
     );
+  } else {
+    main = <TodoList list={props.list} />;
   }
 
+  return (
+    <section className="todo-main">
+      {main}
+    </section>
+  );
 }
 
 TodoMain.propTypes = propTypes;

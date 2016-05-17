@@ -1,15 +1,14 @@
-import React from 'react';
-import ReactDOM from 'react-dom';
+import React, { Component } from 'react';
+import ReactDOM, { render } from 'react-dom';
 import TodoHeader from './TodoHeader';
 import TodoMain from './TodoMain';
 
-class TodoApp extends React.Component {
+class TodoApp extends Component {
 
   constructor() {
     super();
 
     this.changeSearchResult = this.changeSearchResult.bind(this);
-
     this.state = {
       list: [],
       spinner: {
@@ -43,4 +42,4 @@ class TodoApp extends React.Component {
 
 }
 
-ReactDOM.render(<TodoApp />, document.getElementById('rc-app'));
+render(<TodoApp />, document.getElementById('rc-app'));
